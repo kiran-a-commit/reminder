@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
 const User = require('./models/user.model');
-const port = 80;
+const port = 4000;
 const url = 'https://api.telegram.org/bot';
 const apiToken = '1094403671:AAHf2eCtnszbKR5JK6-yB-s056VmHOPRh3U';
 
@@ -40,5 +40,5 @@ app.get('/user/:id', (req, res) => {
 })
 
   app.listen(port, () => {
-    console.log("Connected to port 80");
+    console.log("Connected to port 4000");
 })
