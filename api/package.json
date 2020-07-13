@@ -18,6 +18,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.10",
     "nexmo": "^2.6.0",
+    "node-telegram-bot-api": "^0.50.0",
     "serialport-gsm": "^3.2.1",
     "smpp": "^0.4.0"
   }

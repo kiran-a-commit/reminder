@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 class CreateReminders extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            reminder_description: "",
-            reminder_responsible: "",
+            owner: props.id,
+            reminder_description: "default",
+            reminder_responsible: "defalut",
             reminder_frequency: "NEVER"
         }
         this.onReminderDescription = this.onReminderDescription.bind(this);
         this.onReminderResponsible = this.onReminderDescription.bind(this);
         this.onReminderFrequency = this.onReminderDescription.bind(this);
-        this.onSubmit = this.onSubmit(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
+
     onSubmit(e) {
-        
+        e.preventDefault();
+         const task = {
+            owner: this.state.owner,
+            reminder_description: this.state.reminder_description,
+            reminder_responsible: this.state.reminder_responsible,
+            reminder_frequency: this.state.reminder_frequency
+        }
+        console.log(task);
+         axios.post("https://b0bafdf64a63.ngrok.io/createTask", task).then((response) => {
+         console.log("Response Data =", response.data)
+       })
     }
     onReminderDescription(e) {
         this.setState({
@@ -84,4 +97,6 @@ class CreateReminders extends Component {
     }
 }
 
-export default CreateReminders;
+const mapStateToProps = (state) => (state.loginReducer);
+
+export default connect(mapStateToProps)(CreateReminders);

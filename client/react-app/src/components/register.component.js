@@ -4,6 +4,7 @@ import logo from '../reminder_logo.svg';
 import TelegramLoginButton from './TelegramLoginButton';
 import { addUser } from '../actions';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Register extends Component {
     constructor(props) {
@@ -11,9 +12,15 @@ class Register extends Component {
         this.responseTelegram = this.
         responseTelegram.bind(this)
         this.state = {
-          number: "",
-          resultId: ""
+          userId: ""
         }
+    }
+
+    componentDidUpdate() {
+      console.log(this.state)
+      axios.post("https://b0bafdf64a63.ngrok.io/createUser", {userId: this.state.userId}).then((response) => {
+        console.log("Response Data =", response.data)
+      })
     }
 
    responseTelegram(response) {
@@ -22,6 +29,7 @@ class Register extends Component {
       const { history } = this.props;
       const { dispatch } = this.props;
       dispatch(addUser(response));
+      this.setState({userId: response.id.toString()})
       history.push("/home")
     };
 

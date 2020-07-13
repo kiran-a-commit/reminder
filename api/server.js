@@ -1,43 +1,94 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const axios = require('axios');
-const User = require('./models/user.model');
+const User = require('./models/User');
+const Task = require('./models/Task');
+const mongoose = require('mongoose');
+const TelegramBot = require('node-telegram-bot-api');
 const port = 4000;
-const url = 'https://api.telegram.org/bot';
 const apiToken = '1094403671:AAHf2eCtnszbKR5JK6-yB-s056VmHOPRh3U';
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Endpoints
-app.post('/', (req, res) => {
-  console.log(req.body);
-  const chatId = req.body.message.chat.id;
-  const sentMessage = req.body.message.text;
-  // Regex for hello
-  if (sentMessage.match(/hello/gi)) {
-       axios.post(`${url}${apiToken}/sendMessage`,
-            {
-                 chat_id: chatId,
-                 text: 'hello back 👋'
-            })
-            .then((response) => { 
-                 res.status(200).send(response);
-            }).catch((error) => {
-                 res.send(error);
-            });
-  } else {
-       // if no hello present, just respond with 200 
-       res.status(200).send({});
-  }
+mongoose.connect("mongodb://localhost/reminderdb", { useNewUrlParser: true });
+
+const connection = mongoose.connection;
+
+connection.once('open', function() {
+    console.log("MongoDB database connection established successfully");
+})
+
+// Created instance of TelegramBot
+const bot = new TelegramBot(apiToken, {
+   polling: true
 });
 
-app.get('/user/:id', (req, res) => {
-    const user = User.findOne({requestId: req.params.id})
-    res.status(200).send({user_Id: user._id})
+app.post('/createUser', async (req, res) => {
+     const userId = req.body.userId;
+     console.log(req.body);
+     const user = new User({userId: userId});
+     await User.findOne({userId: userId}, async (error, isUserFound) => {
+          if(isUserFound) {
+               console.log("User already present. Just login")
+          } else {
+               const saveUser  = await user.save();
+               res.status(200).send({success: saveUser});
+          }
+     })
 })
+
+app.post('/createTask', async (req, res) => {
+     const getTaskBody = req.body;
+     const task = new Task(getTaskBody);
+
+     try {
+          await task.save()
+          console.log(task)
+          res.status(201).send(task)
+      }
+  
+      catch(e) {
+           console.log(e)
+          res.status(400).send(e)
+      }
+})
+
+app.get('/tasks/:id', async (req, res) => {
+     const getTasks = await Task.find({owner: req.params.id})
+     res.status(200).send(getTasks);
+})
+
+// Listener (handler) for telegram's /getTasks event
+bot.onText(/\/start/, (msg, match) => {
+     const chatId = msg.chat.id;
+     const tasks = match.input.split(' ')[1];
+     // 'msg' is the received Message from Telegram
+     // 'match' is the result of executing the regexp above on the text content
+     // of the message
+  
+     bot.sendMessage(
+         chatId,
+         'Hello!',
+     );
+  });
+
+
+// Listener (handler) for telegram's /getTasks event
+bot.onText(/\/getTasks/, (msg, match) => {
+     const chatId = msg.chat.id;
+     console.log(chatId)
+     const tasks = match.input.split(' ')[1];
+     // 'msg' is the received Message from Telegram
+     // 'match' is the result of executing the regexp above on the text content
+     // of the message
+  
+     bot.sendMessage(
+         chatId,
+         'Getting the tasks!',
+     );
+  });
 
   app.listen(port, () => {
     console.log("Connected to port 4000");
