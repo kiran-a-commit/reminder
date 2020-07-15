@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import Home from './home.component';
+import {Link } from 'react-router-dom';
 class GetReminders extends Component {
     constructor(props) {
         super(props);
@@ -15,10 +16,6 @@ class GetReminders extends Component {
             this.setState({data: response.data})
             console.log(this.state.data)
         })
-    }
-
-    getKeys = function(){
-        return Object.keys(this.props.data[0]);
     }
 
     render() {
@@ -35,6 +32,7 @@ class GetReminders extends Component {
                         <th class="text-secondary">Description</th>
                         <th class="text-secondary">Responsible</th>
                         <th class="text-secondary">Frequency</th>
+                        <th class="text-secondary">Notes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +58,7 @@ const Row = ({ id }) => (
       <td>{id.reminder_description}</td>
       <td>{id.reminder_responsible}</td>
       <td>{id.reminder_frequency}</td>
+      <td><Link to={{pathname: "/notes", state: {notes: id.notes}}}>Link</Link></td>
     </tr>
   );
 

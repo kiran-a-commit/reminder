@@ -18,6 +18,9 @@ const TaskSchema = new Schema({
     reminder_frequency: {
         type: String,
         required: true
+    },
+    notes: {
+        type: String
     }
 })
 

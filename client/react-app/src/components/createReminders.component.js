@@ -12,7 +12,7 @@ class CreateReminders extends Component {
             reminder_description: "default",
             reminder_responsible: "defalut",
             reminder_frequency: "NEVER",
-            markdown: ""
+            notes: ""
         }
         this.onReminderDescription = this.onReminderDescription.bind(this);
         this.onReminderResponsible = this.onReminderResponsible.bind(this);
@@ -20,8 +20,8 @@ class CreateReminders extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    updateMarkdown(markdown) {
-        this.setState({ markdown });
+    updateMarkdown(notes) {
+        this.setState({ notes });
       }
 
     onSubmit(e) {
@@ -30,7 +30,8 @@ class CreateReminders extends Component {
             owner: this.state.owner,
             reminder_description: this.state.reminder_description,
             reminder_responsible: this.state.reminder_responsible,
-            reminder_frequency: this.state.reminder_frequency
+            reminder_frequency: this.state.reminder_frequency,
+            notes: this.state.notes
         }
 
         console.log(task);
@@ -99,13 +100,13 @@ class CreateReminders extends Component {
                 <textarea
                   className="input"
                   style={inputStyle}
-                  value={this.state.markdown}
+                  value={this.state.notes}
                   onChange={(e) => {
                     this.updateMarkdown(e.target.value);
                   }}
                 >
                   {" "}
-                  {console.log(this.state.markdown)}
+                  {console.log(this.state.notes)}
                 </textarea>
               </div>
             </div>
@@ -121,7 +122,7 @@ class CreateReminders extends Component {
               </div>
               <div style={outputStyle}
               dangerouslySetInnerHTML={{
-                __html: marked(this.state.markdown),
+                __html: marked(this.state.notes),
               }}></div>
             </div>
             </div>

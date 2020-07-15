@@ -7,6 +7,7 @@ import Home from './components/home.component';
 import GetReminders from './components/getReminders.component';
 import EditReminders from './components/editReminders.component';
 import CreateReminders from './components/createReminders.component';
+import Notes from './components/notes.component';
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact path='/getReminders' component={GetReminders}/>
           <Route exact path='/editReminders' component={EditReminders}/>
           <Route exact path='/createReminders' component={CreateReminders}/>
+          <Route path='/notes' component={Notes}/>
         </div>
       </Router>
       </div>
