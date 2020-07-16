@@ -76,18 +76,34 @@ bot.onText(/\/start/, (msg, match) => {
 
 
 // Listener (handler) for telegram's /getTasks event
-bot.onText(/\/getTasks/, (msg, match) => {
+bot.onText(/\myTasks/, async (msg, match) => {
      const chatId = msg.chat.id;
-     console.log(chatId)
-     const tasks = match.input.split(' ')[1];
      // 'msg' is the received Message from Telegram
      // 'match' is the result of executing the regexp above on the text content
-     // of the message
-  
-     bot.sendMessage(
-         chatId,
-         'Getting the tasks!',
-     );
+     // of the message.
+     var messageString = ""
+     try {
+          if(!User.find({userId: chatId})) {
+               messageString = "Please register to use this service."
+          } else {
+               await Task.find({owner: chatId}).then((tasks) => {
+                    for(let i=0; i< tasks.length; i++) {
+                         messageString = messageString + '\n' + 
+                         `${i + 1}.` + '\n' + 
+                         "Description: " + `${tasks[i].reminder_description}` + '\n' + 
+                         "Responsible: " + `${tasks[i].reminder_responsible}` + '\n' + 
+                         "Frequency: " + `${tasks[i].reminder_frequency}`
+                    }
+               })
+            
+               bot.sendMessage(
+                   chatId,
+                   messageString,
+               );
+          }
+     } catch(e) {
+          console.log(e);
+     }
   });
 
   app.listen(port, () => {
