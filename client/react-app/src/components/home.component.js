@@ -14,7 +14,7 @@ function Home () {
   <div class="jumbotron d-flex align-items-center">
   <div class="container">
       <div>
-      <h1 class="text-center" style={{paddingTop: "60px"}}>Welcome Kiran</h1>
+<h1 class="text-center" style={{paddingTop: "60px"}}>Welcome {user.first_name}</h1>
       <h2 class="text-center">Make your notes as well as set reminders.</h2>
   <div class="card-deck" style={cardStyle}>
     <div class="card border-light mb-3 w-50">
