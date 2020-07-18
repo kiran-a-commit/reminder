@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Home from './home.component';
+import Navigation from './navigation.components';
 let marked = require("marked");
 class Notes extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Notes extends Component {
         }
         return(
             <div>
-            <Home></Home>
+                <Navigation/>
             <div style= {navStyle}
             dangerouslySetInnerHTML={{__html: marked(this.state.notes, {sanitize: true})}}></div>
             </div>

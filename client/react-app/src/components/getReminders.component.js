@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import Home from './home.component';
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Navigation from './navigation.components';
 class GetReminders extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +26,7 @@ class GetReminders extends Component {
         }
         return (
         <div>
-            <Home></Home>
+            <Navigation/>
             <div class="container"style={navStyle}>
                 <table class="jumbotron bg-white text-secondary table table-bordered">
                 <thead class="text-white">

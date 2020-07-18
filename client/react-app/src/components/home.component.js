@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useSelector} from 'react-redux';
-import {Link } from 'react-router-dom';
-import logo from '../reminder_logo.svg';
+import Navigation from './navigation.components';
 
 function Home () {
     var cardStyle = {
@@ -10,23 +9,7 @@ function Home () {
     }
     const user = useSelector((state) => state.loginReducer)
     return <div>
-            <nav class="navbar navbar-expand-sm bg-secondary fixed-top">
-                <ul class="navbar-nav mr-auto">
-                <Link class="navbar-brand text-white" to="/">
-                <img src={logo} width="30" height="30" class="d-inline-block align-top" alt="Logo"/>
-                Finnit
-                </Link>
-                    <li class="nav-item active">
-                    <Link class="nav-link text-white" to="getReminders">Reminders</Link>
-                    </li>
-                    <li class="nav-item">
-                    <Link class="nav-link text-white" to="/editReminders">Edit Reminders</Link>
-                    </li>
-                    <li class="nav-item">
-                    <Link class="nav-link text-white" to="/createReminders">Create Reminder</Link>
-                    </li>
-                </ul>
-            </nav>
+        <Navigation/>
             
   <div class="jumbotron d-flex align-items-center">
   <div class="container">
@@ -37,7 +20,7 @@ function Home () {
     <div class="card border-light mb-3 w-50">
     <div class="card-header">
     <h1>
-    <span class="badge badge-pill badge-info xl-2 col-sm-3 offset-md-4 ">3</span>
+    <span class="badge badge-pill badge-danger xl-2 col-sm-3 offset-md-4 ">3</span>
         </h1>
   </div>
     <div class="card-body">
@@ -62,7 +45,7 @@ function Home () {
     <div class="card border-light mb-3 w-50">
     <div class="card-header">
     <h1>
-    <span class="badge badge-pill badge-info xl-2 col-sm-3 offset-md-4 ">3</span>
+    <span class="badge badge-pill badge-success xl-2 col-sm-3 offset-md-4 ">3</span>
         </h1>
   </div>
     <div class="card-body">

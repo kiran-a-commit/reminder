@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import Home from './home.component';
 import Badge from "react-bootstrap/Badge";
+import Navigation from './navigation.components';
 let marked = require("marked");
 class CreateReminders extends Component {
     constructor(props) {
@@ -88,7 +88,7 @@ class CreateReminders extends Component {
     render() {
         return(
             <div>
-                <Home></Home>
+                <Navigation/>
                 <form class="jumbotron bg-light text-dark" onSubmit={this.onSubmit}>
             
                 <div className="form-group">
