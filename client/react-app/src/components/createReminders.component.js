@@ -11,11 +11,18 @@ class CreateReminders extends Component {
             owner: props.id,
             reminder_description: "default",
             reminder_responsible: "defalut",
-            reminder_frequency: "NEVER",
+            reminder_time_hrs: "01",
+            reminder_time_min: "00",
+            reminder_time_partOfDay: "AM",
+            reminder_frequency: "DAILY",
             notes: ""
         }
         this.onReminderDescription = this.onReminderDescription.bind(this);
         this.onReminderResponsible = this.onReminderResponsible.bind(this);
+        this.onReminderTimeHrs = this.
+        onReminderTimeHrs.bind(this);
+        this.onReminderTimeMin = this.onReminderTimeMin.bind(this);
+        this.onReminderTimePartOfDay = this.onReminderTimePartOfDay.bind(this);
         this.onReminderFrequency = this.onReminderFrequency.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -30,12 +37,15 @@ class CreateReminders extends Component {
             owner: this.state.owner,
             reminder_description: this.state.reminder_description,
             reminder_responsible: this.state.reminder_responsible,
+            reminder_time: this.state.reminder_time_hrs+":"+this.state.reminder_time_min+ " "+this.state.reminder_time_partOfDay,
             reminder_frequency: this.state.reminder_frequency,
             notes: this.state.notes
         }
 
         console.log(task);
-         axios.post("https://b0bafdf64a63.ngrok.io/createTask", task).then((response) => {
+         axios.post("https://8b6c580dcff2.ngrok.io/createTask", task, {
+          "Access-Control-Allow-Origin": "*"
+         }).then((response) => {
          console.log("Response Data =", response.data)
        })
     }
@@ -49,6 +59,24 @@ class CreateReminders extends Component {
         this.setState({
             reminder_responsible : e.target.value
         })
+    }
+
+    onReminderTimeHrs(e) {
+      this.setState({
+          reminder_time_hrs : e.target.value
+      })
+    }
+
+    onReminderTimeMin(e) {
+      this.setState({
+          reminder_time_min : e.target.value
+      })
+    }
+
+    onReminderTimePartOfDay(e) {
+      this.setState({
+          reminder_time_partOfDay : e.target.value
+      })
     }
 
     onReminderFrequency(e) {
@@ -75,16 +103,55 @@ class CreateReminders extends Component {
 
                 <label>Reminder for Every:</label>
                 <div class="form-group">
-                <select class="form-control" id="sel1"
+                  <div class="form-inline">
+                  <select class="form-control" id="sel1"
                 value={this.state.reminder_frequency} 
                 onChange={this.onReminderFrequency}>
-                    <option>6hrs</option>
-                    <option>12hrs</option>
-                    <option>1day</option>
-                    <option>1week</option>
-                    <option>NEVER</option>
+                    <option>DAILY</option>
+                    <option>WEEKLY</option>
                 </select>
+                  </div>
                 </div>
+
+                <div class="form-group">
+            <label for="time">Select Time:</label>
+                <div class="form-inline">
+                    <select class="form-control" id="hrs"
+                    value={this.state.reminder_time_hrs} 
+                    onChange={this.onReminderTimeHrs}>
+                        <option>01</option>
+                        <option>02</option>
+                        <option>03</option>
+                        <option>04</option>
+                        <option>05</option>
+                        <option>06</option>
+                        <option>07</option>
+                        <option>08</option>
+                        <option>09</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                    </select>
+
+                    <select class="form-control" id="min"
+                    value={this.state.reminder_time_min} 
+                    onChange={this.onReminderTimeMin}>
+                        <option>00</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                        <option>40</option>
+                        <option>50</option>
+                        </select>
+                    
+                    <select class="form-control" id="partOfDay"
+                    value={this.state.reminder_time_partOfDay} 
+                    onChange={this.onReminderTimePartOfDay}>
+                        <option>AM</option>
+                        <option>PM</option>
+                    </select>
+                </div>
+            </div>
 
                 <div className="row mt-4">
             <div className="form-group">

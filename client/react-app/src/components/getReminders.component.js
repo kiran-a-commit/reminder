@@ -12,7 +12,9 @@ class GetReminders extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://b0bafdf64a63.ngrok.io/tasks/'+`${this.props.id}`).then((response) => {
+        axios.get('https://8b6c580dcff2.ngrok.io/tasks/'+`${this.props.id}`, {
+            "Access-Control-Allow-Origin": "*"
+        }).then((response) => {
             this.setState({data: response.data})
             console.log(this.state.data)
         })
@@ -31,6 +33,7 @@ class GetReminders extends Component {
                     <tr>
                         <th class="text-secondary">Description</th>
                         <th class="text-secondary">Responsible</th>
+                        <th class="text-secondary">Time (24hrs format)</th>
                         <th class="text-secondary">Frequency</th>
                         <th class="text-secondary">Notes</th>
                     </tr>
@@ -57,6 +60,7 @@ const Row = ({ id }) => (
     <tr>
       <td>{id.reminder_description}</td>
       <td>{id.reminder_responsible}</td>
+      <td>{id.reminder_time}</td>
       <td>{id.reminder_frequency}</td>
       <td><Link to={{pathname: "/notes", state: {notes: id.notes}}}>Link</Link></td>
     </tr>

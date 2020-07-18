@@ -1,9 +1,13 @@
 const Task = require('../models/Task');
 const express = require('express');
+const helper = require('../helpers');
 const router = express.Router();
 
 router.post('/createTask', async (req, res) => {
-    const getTaskBody = req.body;
+    const getTaskBody = {
+        ...req.body,
+        reminder_time: helper.convertTo24TimeFormat(req.body.reminder_time)
+    }
     const task = new Task(getTaskBody);
 
     try {

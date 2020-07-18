@@ -18,7 +18,9 @@ class Register extends Component {
 
     componentDidUpdate() {
       console.log(this.state)
-      axios.post("https://b0bafdf64a63.ngrok.io/createUser", {userId: this.state.userId}).then((response) => {
+      axios.post("https://8b6c580dcff2.ngrok.io/createUser", {userId: this.state.userId}, {
+          "Access-Control-Allow-Origin": "*"
+      }).then((response) => {
         console.log("Response Data =", response.data)
       })
     }
