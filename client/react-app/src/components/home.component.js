@@ -14,12 +14,12 @@ function Home () {
         <Navigation/>
             
   <div class="container">
-      <div class="jumbotron d-flex align-items-center border border-light" style={cardStyle}>
+      <div class="jumbotron d-flex align-items-center" style={cardStyle}>
           <div>
           <h1 class="text-center">Welcome {user.first_name}</h1>
       <h4 class="text-center">Make your notes as well as set reminders.</h4>
   <div class="card-deck" style={cardStyle}>
-    <div class="card border-light mb-3 w-50">
+    <div class="card border-light mb-3 w-50 z-depth-4">
     <div class="card-header">
     <h1>
     <span class="badge badge-pill badge-danger xl-2 col-sm-3 offset-md-4 ">3</span>
@@ -33,7 +33,7 @@ function Home () {
       </div>
     </div>
   </div>
-    <div class="card border-light mb-3 w-50">
+    <div class="card border-light mb-3 w-50 z-depth-4">
     <div class="card-header">
     <h1>
     <span class="badge badge-pill badge-info xl-2 col-sm-3 offset-md-4 ">3</span>
@@ -48,7 +48,7 @@ function Home () {
     </div>
   </div>
 
-    <div class="card border-light mb-3 w-50">
+    <div class="card border-light mb-3 w-50 z-depth-4">
     <div class="card-header">
     <h1>
     <span class="badge badge-pill badge-success xl-2 col-sm-3 offset-md-4 ">3</span>
