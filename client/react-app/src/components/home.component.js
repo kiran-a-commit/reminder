@@ -2,20 +2,22 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useSelector} from 'react-redux';
 import Navigation from './navigation.components';
+import { BsArrowRightShort } from "react-icons/bs";
 
 function Home () {
     var cardStyle = {
-        marginTop: "200px"
+        marginTop: "80px"
     }
+
     const user = useSelector((state) => state.loginReducer)
-    return <div>
+    return <div class="home-body">
         <Navigation/>
             
-  <div class="jumbotron d-flex align-items-center">
   <div class="container">
-      <div>
-<h1 class="text-center" style={{paddingTop: "60px"}}>Welcome {user.first_name}</h1>
-      <h2 class="text-center">Make your notes as well as set reminders.</h2>
+      <div class="jumbotron d-flex align-items-center border border-light" style={cardStyle}>
+          <div>
+          <h1 class="text-center">Welcome {user.first_name}</h1>
+      <h4 class="text-center">Make your notes as well as set reminders.</h4>
   <div class="card-deck" style={cardStyle}>
     <div class="card border-light mb-3 w-50">
     <div class="card-header">
@@ -24,9 +26,11 @@ function Home () {
         </h1>
   </div>
     <div class="card-body">
-      <h5 class="card-title">Important Tasks</h5>
-      <p class="card-text">Lists all the important tasks to be reminded.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h5 class="card-title style-card-title">Important Tasks</h5>
+      <p class="card-text style-card-body">Lists all the important tasks to be reminded.</p>
+      <div class="float-right">
+      <BsArrowRightShort class="text-muted iconStyle"></BsArrowRightShort>
+      </div>
     </div>
   </div>
     <div class="card border-light mb-3 w-50">
@@ -36,9 +40,11 @@ function Home () {
         </h1>
   </div>
     <div class="card-body">
-      <h5 class="card-title">Important Tasks</h5>
-      <p class="card-text">Lists all the important tasks to be reminded.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h5 class="card-title style-card-title">Finished Tasks</h5>
+      <p class="card-text style-card-body">Lists all the finsihed tasks. Can be opened again.</p>
+      <div class="float-right">
+      <BsArrowRightShort class="text-muted iconStyle"></BsArrowRightShort>
+      </div>
     </div>
   </div>
 
@@ -49,15 +55,17 @@ function Home () {
         </h1>
   </div>
     <div class="card-body">
-      <h5 class="card-title">Important Tasks</h5>
-      <p class="card-text">Lists all the important tasks to be reminded.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h5 class="card-title style-card-title">Upcoming Tasks</h5>
+      <p class="card-text style-card-body">Tasks which are scheduled to be reminded currently.</p>
+      <div class="float-right">
+      <BsArrowRightShort class="text-muted iconStyle"></BsArrowRightShort>
+      </div>
     </div>
   </div>
 </div>
-  </div>
-  </div>
 </div>
+  </div>
+  </div>
         </div>
         
 }

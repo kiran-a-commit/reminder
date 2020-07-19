@@ -23,6 +23,49 @@ code {
   font-size: 10em;
 }
 
+.home-body {
+  background-color: whitesmoke;
+}
+
+.jumbotron {
+  background:transparent !important
+}
+
+.iconStyle {
+  font-size:30px;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+}
+
+.iconStyle:hover {
+  transform: translate(10px, 0px);
+}
+
+.style-card-title {
+  font-stretch: wider;
+  font-size: large;
+  font-style: normal;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.style-card-body {
+  font-style: normal;
+  font-family: monospace;
+}
+
+h1, h2, h3, h4, label {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .container {
   display: flex;
   flex-direction: column;
